@@ -30,26 +30,19 @@ flowchart TD
     A["<b>1 · TRUST THE DATA</b><br/>validate every table → propose corrections<br/>→ a human accepts or declines → corrected copies"]
     B["<b>2 · DECIDE WHAT MATTERS</b><br/>drift + peer gap + spike, sized against each<br/>center's own volatility → suppress noise → rank"]
     C["<b>3 · VERIFY THE SIGNAL</b><br/>turn ranked rows into evidence packets<br/>→ reconcile every claim against deterministic facts"]
-    D["<b>4 · DRAFT THE ACTION PLAN</b><br/>action hypothesis + named owner + expected<br/>movement + check-by date"]
-    G{"<b>REGIONAL PARTNER GATE</b><br/>approve · edit · decline<br/><i>production handoff</i>"}
-    E["<b>5 · STORE THE APPROVED COMMITMENT</b><br/>Operating Plan Tracker = system of record<br/>ledger = audit + machine memory"]
-    X["Log the decision<br/>no active commitment"]
+    D["<b>4 · RECOMMEND + DRAFT PLAN</b><br/>action hypothesis + named owner + expected<br/>movement + check-by date"]
+    E["<b>5 · APPROVE + STORE COMMITMENT</b><br/>Regional Partner approve · edit · decline<br/>approved plan → tracker + ledger memory"]
     F["<b>6 · RE-CHECK NEXT MONDAY</b><br/>Was it done? (attested) · Did it work? (measured)<br/>→ close · adjust the mechanism · escalate"]
-    A --> B --> C --> D --> G
-    G -- "approved / edited" --> E --> F
-    G -- "declined" --> X
+    A --> B --> C --> D --> E --> F
     F -. "next run" .-> A
-    X -. "next run" .-> A
 ```
 
-**Production handoff, not simulated:** the case artifact proves the recommendation
-and close-the-loop mechanics with a local ledger. In Petfolk's live workflow, a
-recommendation should remain a draft until the existing Regional Partner approval
-step approves or edits it. The clinic's existing Operating Plan Tracker in Google
-Sheets remains the operational system of record; the ledger becomes the append-only
-audit and machine-memory layer that lets the next Monday reason from the prior one.
-A decline is recorded, but it never becomes an active commitment. See
-[`docs/PRODUCTION_INTEGRATION.md`](docs/PRODUCTION_INTEGRATION.md).
+**Production fit:** the case artifact uses its local ledger to prove the closed loop.
+In Petfolk's live workflow, a generated action is a draft until the Regional Partner
+approves or edits it; approved actions write to the clinic's existing Google Sheets
+Operating Plan Tracker, which remains the operational system of record. The ledger
+remains the append-only audit and machine-memory layer for the next Monday's re-check.
+A declined recommendation is logged, not treated as an active commitment.
 
 Three layers, and the boundary between them is the design:
 
@@ -62,10 +55,6 @@ Three layers, and the boundary between them is the design:
 **The trust boundary:** every number and every conclusion a model writes must
 reconcile against the deterministic facts before it reaches a leader. What fails is
 regenerated. What fails twice falls back to a deterministic sentence.
-
-The same boundary applies to execution: **human-attested execution and measured KPI
-outcome stay separate.** A metric moving does not prove the proposed work happened,
-and it does not prove causality.
 
 ---
 
@@ -141,10 +130,7 @@ date of 2026-05-04. The 2026-05-04 run opened with them:
   attested that anything was done, so execution stays *unknown* and the row stays
   open. The digest credits the number, not the action.
 
-The prototype ledger is append-only and it is what the next run reads first. In a
-production integration, the approved Operating Plan Tracker row is the operational
-record while the ledger preserves the machine-readable decision history and evidence
-needed for the re-check.
+The ledger is append-only and it is what the next run reads first.
 
 ---
 
@@ -169,8 +155,7 @@ same whether the wording came from an available LLM or the deterministic fallbac
 | | |
 |---|---|
 | [`docs/SCORING.md`](docs/SCORING.md) | every formula, window, weight and threshold, and the argument for each |
-| [`docs/PIPELINE.md`](docs/PIPELINE.md) | the case-artifact run end to end, module by module, plus the ledger contract |
-| [`docs/PRODUCTION_INTEGRATION.md`](docs/PRODUCTION_INTEGRATION.md) | how the recommendation layer fits the existing approval and Operating Plan Tracker workflow |
+| [`docs/PIPELINE.md`](docs/PIPELINE.md) | the run end to end, module by module, plus the ledger contract |
 | [`PROMPTS/`](PROMPTS/) | the prompts, loaded from disk at runtime. Editing one changes the next run |
 | [`pipeline/harness.py`](pipeline/harness.py) | the number check and the rule table |
 | [`tests/test_scoring.py`](tests/test_scoring.py) | known slow slides must be caught by drift and not by spike, and the reverse |
