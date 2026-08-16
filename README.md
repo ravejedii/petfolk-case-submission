@@ -1,5 +1,7 @@
 # Petfolk AI Strategy Lead Case Study — Lucas Richards
 
+**Live demo:** [petfolk-monday-digest.vercel.app](https://petfolk-monday-digest.vercel.app)
+
 **The Monday Digest.** Option A of the Case Study. The prioritization layer is the engine inside it.
 
 > **Public candidate submission.** This is an unofficial case-study prototype, not
@@ -22,7 +24,7 @@ matters:
 
 Neither plan recorded whether the recommended work was completed.
 
-## What the deliverable does
+## What the 6-Stage Operating Loop Actually Does
 
 The Monday Digest turns four raw operating tables into a weekly decision loop. It
 validates the inputs, surfaces the few priorities that deserve attention, recommends
@@ -32,6 +34,31 @@ separately whether the work happened and whether it worked.
 The experience is designed for a thirty-minute Monday review. Deterministic code owns
 every calculation and threshold; AI is limited to verified interpretation,
 recommendations, and grounded conversation.
+
+![The Monday digest for 2026-05-04](docs/assets/digest.jpg)
+
+---
+
+## Run it locally
+
+Requires Python 3 and Node.js 20+.
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install pandas numpy pytest
+
+cd app
+npm install
+npm run dev
+```
+
+Open [http://localhost:5173/admin](http://localhost:5173/admin), choose a Monday,
+and run the pipeline. The four assessment CSVs are already included in
+`DATA/INPUTS/`.
+
+---
+
+## How it works
 
 ### Execution path
 
@@ -59,11 +86,7 @@ generate_digest()
 END
 ```
 
-![The Monday digest for 2026-05-04](docs/assets/digest.jpg)
-
----
-
-## The loop
+### Six-stage operating loop
 
 ```mermaid
 flowchart TD
@@ -158,16 +181,12 @@ self-reported status on 8 of 10.**
 
 ---
 
-## Run it
+## Reproduce the two-run result
 
-**Hosted:** [petfolk-monday-digest.vercel.app](https://petfolk-monday-digest.vercel.app)
-opens empty on purpose. Go to **AI Strategy Lead**, drop the four CSVs in, and the
-digest gets built in front of you.
-
-**The pipeline alone**, after placing the four assessment CSVs as described below:
+After completing the local setup above, run the following commands from the repository
+root:
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install pandas numpy pytest
 .venv/bin/python -m pipeline.validate --as-of 2026-04-27 --accept all
 .venv/bin/python -m pipeline.run --as-of 2026-04-27 --fresh-ledger
 .venv/bin/python -m pipeline.validate --as-of 2026-05-04 --accept all
@@ -175,35 +194,19 @@ python3 -m venv .venv && .venv/bin/pip install pandas numpy pytest
 .venv/bin/python -m pytest                            # 216 tests
 ```
 
-**The app:** `cd app && npm install && npm run dev` → API on :4600, UI on :5173.
-
 The original inputs and corrected working copies ship in `DATA/`, so the command-line
-flow works after installation; the hosted demo still opens empty so a reviewer can
-watch the system earn its conclusion from the four uploads. No model key is required:
-with no LLM reachable, every sentence falls back to a deterministic template and the
-numbers do not change. See [`DATA/README.md`](DATA/README.md) for the data contract.
-
----
-
-
-
-The ledger is append-only and it is what the next run reads first.
+flow works after installation. No model key is required: with no LLM reachable, every
+sentence falls back to a deterministic template and the numbers do not change. See
+[`DATA/README.md`](DATA/README.md) for the data contract.
 
 ---
 
 ## The harness
 
-Every generated sentence goes through it before a leader sees it. Every
-figure in it must exist in the fact table that was handed to the model, and a
-deterministic rule table bounds the conclusion — below baseline can never be "on
-track"; target already met must recommend closing; past due and untouched for 42+
-days must be flagged abandoned. A failure regenerates with the complaint pasted
-into the next attempt. A second failure falls back to the deterministic sentence.
-Every check is logged, pass or fail.
-
-On the 2026-05-04 run: **33 checks, 0 failures, 0 regenerations**. The run log and UI
-identify the exact language tier used; the figures and verdict constraints are the
-same whether the wording came from an available LLM or the deterministic fallback.
+Every AI-written conclusion is checked against the underlying numbers before it
+reaches a leader. A below-baseline plan cannot be called "on track"; a plan that has
+already reached its target should be closed; and an overdue plan with no recent
+update is flagged for attention.
 
 ---
 
@@ -213,6 +216,7 @@ same whether the wording came from an available LLM or the deterministic fallbac
 |---|---|
 | [`docs/SCORING.md`](docs/SCORING.md) | every formula, window, weight and threshold, and the argument for each |
 | [`docs/PIPELINE.md`](docs/PIPELINE.md) | the run end to end, module by module, plus the ledger contract |
+| [`docs/LOOM_TRANSCRIPT.md`](docs/LOOM_TRANSCRIPT.md) | timestamped transcript of the submitted technical walkthrough |
 | [`PROMPTS/`](PROMPTS/) | the prompts, loaded from disk at runtime. Editing one changes the next run |
 | [`pipeline/harness.py`](pipeline/harness.py) | the number check and the rule table |
 | [`tests/test_scoring.py`](tests/test_scoring.py) | known slow slides must be caught by drift and not by spike, and the reverse |
