@@ -83,6 +83,22 @@ test("a queue of only already-narrated phases renders nothing", () => {
   );
 });
 
+test("durable thread entries never replay as concurrent typewriter streams", () => {
+  const src = fs.readFileSync(path.join(WEB_SRC, "components", "SidePanel.jsx"), "utf8");
+  const narrative = src.slice(
+    src.indexOf("function NarrativeBubble"),
+    src.indexOf("// One thread entry")
+  );
+  const entry = src.slice(
+    src.indexOf("function Entry"),
+    src.indexOf("// The answer as it is being written")
+  );
+
+  assert.doesNotMatch(narrative, /useTypewriter|stream-cursor|animate/);
+  assert.doesNotMatch(entry, /animate=/);
+  assert.match(src, /function StreamingNarrative[\s\S]*useTypewriter/);
+});
+
 test("an unknown phase sorts last — a name this build does not know never jumps the queue", () => {
   const { pickLiveNarration } = phases;
   assert.equal(

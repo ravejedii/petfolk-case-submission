@@ -160,22 +160,16 @@ weekly load, negative wait times from a clock-sync bug, and maturity labels that
 contradicted opening dates. Raw inputs are never edited; accepted corrections are
 applied only to a working copy and reused consistently on the next run.
 
-**3 signals out of 121 center × metric combinations.**
-
-| | center | what moved |
-|---|---|---|
-| 1 | Mount Pleasant | staff call-outs 7.2 over 4 weeks against its own 12-week norm of 1.6, worst of 8 ramping centers |
-| 2 | Daniel Island | no-show rate 8.5% against a 6.6% norm, worst of 12 new centers |
-| 3 | Morrisville | records completed in 24h down to 77.7% from 87.7%, worst of 27 mature centers |
+**3 signals surfaced from 121 center × metric combinations.** The new issue not
+already covered above was Daniel Island, where the no-show rate reached 8.5% against
+a 6.6% norm, worst of 12 new centers.
 
 **4 more were held back and shown as held back.** Verdae CSAT looked like the worst
 number on the page: 3.54/5 in the latest week. It was 7 responses. Pooled over 8
 weeks it is 4.46/5 on 97 responses. The digest lists it, with the score it would
 have reached on the naive read.
 
-**10 action plans graded, every plan, every run.** 3 not working, 1 abandoned, 5
-already past target and still open, 1 on track. **The AI disagreed with the owner's
-self-reported status on 8 of 10.**
+The complete plan-by-plan comparison is shown below.
 
 ![Claimed vs. Verified: reported status, the numbers, and the AI's verdict](docs/assets/claimed-vs-verified.jpg)
 

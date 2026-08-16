@@ -524,7 +524,7 @@ function AnswerCard({ payload }) {
 // that actually wrote it; provider-fallback reasons stay out of the thread.
 // ---------------------------------------------------------------------------
 
-function NarrativeBubble({ payload, animate }) {
+function NarrativeBubble({ payload }) {
   const {
     text,
     decided_by: decidedBy,
@@ -535,18 +535,14 @@ function NarrativeBubble({ payload, animate }) {
     attempts,
   } = payload;
   const [open, setOpen] = useState(false);
-  const [shown] = useTypewriter(animate ? text : "");
-  const body = animate ? shown : text;
-  const typing = Boolean(animate && shown.length < text.length);
   return (
     <div className="thread-bubble ai narrative">
       <div className="narrative-text">
         <BubbleText
-          text={body}
-          receipts={typing ? [] : receipts}
+          text={text}
+          receipts={receipts}
           onOpenReceipts={() => setOpen(true)}
         />
-        {typing && <span className="stream-cursor" aria-hidden="true" />}
       </div>
       <CheckLine
         artifactsRead={artifactsRead}
@@ -565,7 +561,7 @@ function NarrativeBubble({ payload, animate }) {
 // One thread entry
 // ---------------------------------------------------------------------------
 
-function Entry({ entry, decisionBusy, decisionError, onDecide, animate }) {
+function Entry({ entry, decisionBusy, decisionError, onDecide }) {
   if (entry.type === "narration" && entry.payload) {
     // A deterministic placeholder already replaced by its phase's narrative.
     if (entry.payload.superseded) return null;
@@ -575,7 +571,7 @@ function Entry({ entry, decisionBusy, decisionError, onDecide, animate }) {
       return (
         <div className="thread-entry ai">
           <NarrationMeta phase={entry.payload.phase} title={entry.payload.title} />
-          <NarrativeBubble payload={entry.payload} animate={Boolean(animate)} />
+          <NarrativeBubble payload={entry.payload} />
         </div>
       );
     }
@@ -625,7 +621,7 @@ function Entry({ entry, decisionBusy, decisionError, onDecide, animate }) {
     return (
       <div className="thread-entry system">
         <div className="thread-meta">System (Deterministic)</div>
-        <SystemBubble text={entry.payload.text} animate={Boolean(animate)} />
+        <SystemBubble text={entry.payload.text} />
       </div>
     );
   }
@@ -676,17 +672,8 @@ function useTypewriter(full) {
   return [full.slice(0, shown), flush];
 }
 
-function SystemBubble({ text, animate }) {
-  const [shown] = useTypewriter(animate ? text : "");
-  const body = animate ? shown : text;
-  return (
-    <div className="thread-bubble system">
-      {body}
-      {animate && shown.length < text.length && (
-        <span className="stream-cursor" aria-hidden="true" />
-      )}
-    </div>
-  );
+function SystemBubble({ text }) {
+  return <div className="thread-bubble system">{text}</div>;
 }
 
 // Text arrives from the model in bursts. Display is paced so it can be read.
@@ -1020,29 +1007,9 @@ export default function SidePanel({ asOf, collapsed, onToggle }) {
     [entries, liveNarration, narratedPhases]
   );
 
-  // New system lines type in; lines already on the thread when we loaded do not.
-  const seenSystemIds = useRef(new Set());
-  const [freshSystemIds, setFreshSystemIds] = useState(() => new Set());
-  useEffect(() => {
-    if (seenSystemIds.current.size === 0) {
-      for (const entry of visibleEntries) seenSystemIds.current.add(entry.id);
-      return;
-    }
-    const arrived = [];
-    for (const entry of visibleEntries) {
-      if (seenSystemIds.current.has(entry.id)) continue;
-      seenSystemIds.current.add(entry.id);
-      if (entry.role === "system" || entry.payload?.kind === "narrative") {
-        arrived.push(entry.id);
-      }
-    }
-    if (arrived.length === 0) return;
-    setFreshSystemIds((prev) => {
-      const next = new Set(prev);
-      for (const id of arrived) next.add(id);
-      return next;
-    });
-  }, [visibleEntries]);
+  // Durable thread entries render atomically. Only the single provisional
+  // draft below is paced character-by-character; replaying every entry that a
+  // poll returns makes completed phase notes appear to stream concurrently.
 
   // What this thread is about, from the thread itself: the last thing that
   // happened in it. The panel is a conversation, and a conversation needs a
@@ -1547,7 +1514,6 @@ export default function SidePanel({ asOf, collapsed, onToggle }) {
               decisionBusy={decisionBusy}
               decisionError={decisionError}
               onDecide={decide}
-              animate={freshSystemIds.has(en.id)}
             />
           ))
         )}
