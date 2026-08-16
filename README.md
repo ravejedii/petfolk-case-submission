@@ -8,25 +8,21 @@
 > a Petfolk production system. Petfolk names and trademarks belong to Petfolk.
 
 
-## The reported status and the results did not match
+## Data Insights: The action-plan status did not match the results
 
-For 8 of the 10 existing action plans, the operating results did not support the on-track
-status reported by Dr. Priya. The following week's data showed me why that distinction
-matters:
+For 8 of the 10 existing action plans, the latest results did not support the on-track
+status reported by Dr. Priya in the tracker. The following week’s data highlights why the system tracks two questions separately: 
+1) Was the work completed? 2) Did the KPI actually improve?
 
-- **Mount Pleasant, staff call-outs.** Call-outs went 5.5 → 9, so the outcome moved
-  the wrong way. Nobody attested that the prior action plan was completed, so execution
-  remains *unknown* and the digest asks the owner to confirm execution before
-  changing the mechanism.
-- **Morrisville, records in 24h.** 78.1% → 79.5%, moving the right way. Nobody
-  attested that anything was done, so execution stays *unknown* and the row stays
-  open. The digest credits the number, not the action.
+- **Mount Pleasant, staff call-outs.** Weekly call-outs went 5.5 → 9, so the result was worse
+  and nobody attested that the prior action plan was completed, so execution
+  remains *unknown*.  Therefore, the existing Operating Tracker kept the issue open and asks the owner for an update.
+- **Morrisville, records in 24h.** 78.1% → 79.5%. However, no one confirmed whether the action plan was completed, so the data currently the improvement without claiming the action caused it.
 
-Neither plan recorded whether the recommended work was completed.
 
 ## What the 6-Stage Operating Loop Actually Does
 
-The Monday Digest turns four raw operating tables into a weekly decision loop that empowers Dr. Priya to focus on critical priorities. It
+This repo turns four raw operating tables into a weekly decision loop that empowers Dr. Priya to focus on critical priorities. It
 validates the inputs, surfaces the few priorities that deserve attention, recommends
 a specific action, routes it for approval, and returns the following week to check
 separately whether the work happened and whether it worked.
