@@ -6,9 +6,11 @@
 > a Petfolk production system. Petfolk names and trademarks belong to Petfolk.
 
 
-## Critical Insights from Data
+## The reported status and the results did not match
 
- The operating data did not support the self-reported status on 8 of 10 action plans.
+For 8 of the 10 existing action plans, the operating results did not support the
+status reported by the owner. The following week's data showed why that distinction
+matters:
 
 - **Mount Pleasant, staff call-outs.** Call-outs went 5.5 → 9, so the outcome moved
   the wrong way. Nobody attested that the prior action was completed, so execution
@@ -20,8 +22,20 @@
 
 Neither plan recorded whether the recommended work was completed.
 
-Here's how we solve it
+## What the deliverable does
 
+The Monday Digest turns four raw operating tables into a weekly decision loop. It
+validates the inputs, surfaces the few priorities that deserve attention, recommends
+a specific action, routes it for approval, and returns the following week to check
+separately whether the work happened and whether it worked.
+
+The experience is designed for a thirty-minute Monday review. Deterministic code owns
+every calculation and threshold; AI is limited to verified interpretation,
+recommendations, and grounded conversation.
+
+### Execution path
+
+```text
 START
   ↓
 validate_data()          ← deterministic Python
@@ -43,15 +57,7 @@ update_ledger()
 generate_digest()
   ↓
 END
-
-
-Today she gets a dashboard and a spreadsheet every Monday and gives them about thirty
-minutes. Inside them are duplicate rows, centers compared against
-the wrong peer group, slow slides no weekly threshold catches, and action plans whose
-reported status the numbers contradict.
-
-I built a system that decides what earns those thirty minutes, says what to do about
-it, and the following Monday checks whether it got done and whether it worked.
+```
 
 ![The Monday digest for 2026-05-04](docs/assets/digest.jpg)
 
