@@ -10,12 +10,12 @@
 
 ## The reported status and the results did not match
 
-For 8 of the 10 existing action plans, the operating results did not support the
-status reported by the owner. The following week's data showed why that distinction
+For 8 of the 10 existing action plans, the operating results did not support the on-track
+status reported by Dr. Priya. The following week's data showed me why that distinction
 matters:
 
 - **Mount Pleasant, staff call-outs.** Call-outs went 5.5 → 9, so the outcome moved
-  the wrong way. Nobody attested that the prior action was completed, so execution
+  the wrong way. Nobody attested that the prior action plan was completed, so execution
   remains *unknown* and the digest asks the owner to confirm execution before
   changing the mechanism.
 - **Morrisville, records in 24h.** 78.1% → 79.5%, moving the right way. Nobody
@@ -26,7 +26,7 @@ Neither plan recorded whether the recommended work was completed.
 
 ## What the 6-Stage Operating Loop Actually Does
 
-The Monday Digest turns four raw operating tables into a weekly decision loop. It
+The Monday Digest turns four raw operating tables into a weekly decision loop that empowers Dr. Priya to focus on critical priorities. It
 validates the inputs, surfaces the few priorities that deserve attention, recommends
 a specific action, routes it for approval, and returns the following week to check
 separately whether the work happened and whether it worked.
