@@ -156,25 +156,9 @@ same whether the wording came from an available LLM or the deterministic fallbac
 
 ---
 
-## What it will not claim
-
-**It cannot prove an action was performed.** Call-outs falling from 9 to 3 is not
-evidence that anyone did the thing. Execution is attested by a person and defaults
-to unknown. Outcome is measured. They are stored as two fields, and where nobody has
-attested, the digest says so instead of inferring.
-
-**It cannot prove cause.** The data shows Daniel Island's no-show rate is 8.5%
-against a 6.6% norm and worst among its peers. It does not show that confirmation
-outreach is why. Recommendations are labelled either evidence-backed, where
-provider-level data shows the shape of the problem, or playbook, where the mechanism
-is a standard first move. When a playbook move is executed and the number does not
-respond, the ledger records that and the next run proposes a different mechanism.
-
----
-
 ## How I used AI
 
-Started with four dirty CSVs and a brief.
+Started with four baseline CSVs and a brief.
 
 Everything that is arithmetic is Python: cleaning, scoring, peer grouping,
 suppression, plan facts. An LLM sits only where judgment and language belong, and
