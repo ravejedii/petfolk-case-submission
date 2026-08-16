@@ -30,12 +30,19 @@ flowchart TD
     A["<b>1 · TRUST THE DATA</b><br/>validate every table → propose corrections<br/>→ a human accepts or declines → corrected copies"]
     B["<b>2 · DECIDE WHAT MATTERS</b><br/>drift + peer gap + spike, sized against each<br/>center's own volatility → suppress noise → rank"]
     C["<b>3 · VERIFY THE SIGNAL</b><br/>turn ranked rows into evidence packets<br/>→ reconcile every claim against deterministic facts"]
-    D["<b>4 · RECOMMEND AND ASSIGN</b><br/>action hypothesis + named owner + expected<br/>movement + check-by date"]
-    E["<b>5 · STORE THE COMMITMENT</b><br/>append the decision, owner, target and evidence<br/>to durable memory"]
+    D["<b>4 · RECOMMEND + DRAFT PLAN</b><br/>action hypothesis + named owner + expected<br/>movement + check-by date"]
+    E["<b>5 · APPROVE + STORE COMMITMENT</b><br/>Regional Partner approve · edit · decline<br/>approved plan → tracker + ledger memory"]
     F["<b>6 · RE-CHECK NEXT MONDAY</b><br/>Was it done? (attested) · Did it work? (measured)<br/>→ close · adjust the mechanism · escalate"]
     A --> B --> C --> D --> E --> F
     F -. "next run" .-> A
 ```
+
+**Production fit:** the case artifact uses its local ledger to prove the closed loop.
+In Petfolk's live workflow, a generated action is a draft until the Regional Partner
+approves or edits it; approved actions write to the clinic's existing Google Sheets
+Operating Plan Tracker, which remains the operational system of record. The ledger
+remains the append-only audit and machine-memory layer for the next Monday's re-check.
+A declined recommendation is logged, not treated as an active commitment.
 
 Three layers, and the boundary between them is the design:
 
