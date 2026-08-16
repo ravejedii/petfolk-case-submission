@@ -1,0 +1,14 @@
+{
+  "name": "petfolk-monday-digest-deploy",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Deployment shell: builds the app in app/ and ships the Python pipeline with it. The app itself lives in app/package.json.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "bash vercel-build.sh",
+    "start": "npm --prefix app start",
+    "test": "npm --prefix app test"
+  }
+}
