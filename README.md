@@ -1,18 +1,52 @@
 # Petfolk AI Strategy Lead Case Study — Lucas Richards
 
-**The Monday Digest.** Option A of the brief. The prioritization layer is the engine
-inside it.
+**The Monday Digest.** Option A of the Case Study. The prioritization layer is the engine inside it.
 
 > **Public candidate submission.** This is an unofficial case-study prototype, not
-> a Petfolk production system. Petfolk names and trademarks belong to Petfolk. The
-> assessment brief itself, generated run artifacts, local credentials, deployment
-> linkage, and internal development instructions are intentionally excluded.
+> a Petfolk production system. Petfolk names and trademarks belong to Petfolk.
 
-Dr. Priya Raghunathan is a Regional Medical Partner. She owns 11 of Petfolk's 47 Pet
-Care Centers.
+
+## Critical Insights from Data
+
+ The operating data did not support the self-reported status on 8 of 10 action plans.
+
+- **Mount Pleasant, staff call-outs.** Call-outs went 5.5 → 9, so the outcome moved
+  the wrong way. Nobody attested that the prior action was completed, so execution
+  remains *unknown* and the digest asks the owner to confirm execution before
+  changing the mechanism.
+- **Morrisville, records in 24h.** 78.1% → 79.5%, moving the right way. Nobody
+  attested that anything was done, so execution stays *unknown* and the row stays
+  open. The digest credits the number, not the action.
+
+Neither plan recorded whether the recommended work was completed.
+
+Here's how we solve it
+
+START
+  ↓
+validate_data()          ← deterministic Python
+  ↓
+human correction gate   ← pause/accept/decline
+  ↓
+score_signals()          ← deterministic Python
+  ↓
+analyze_signals()        ← LLM sees validation + signals
+  ↓
+harness_check()          ← deterministic Python
+  ↓
+load_prior_ledger()
+  ↓
+recheck_prior_actions()  ← deterministic evidence + LLM judgment where needed
+  ↓
+update_ledger()
+  ↓
+generate_digest()
+  ↓
+END
+
 
 Today she gets a dashboard and a spreadsheet every Monday and gives them about thirty
-minutes. Inside them are duplicate rows, impossible values, centers compared against
+minutes. Inside them are duplicate rows, centers compared against
 the wrong peer group, slow slides no weekly threshold catches, and action plans whose
 reported status the numbers contradict.
 
@@ -43,6 +77,37 @@ approves or edits it; approved actions write to the clinic's existing Google She
 Operating Plan Tracker, which remains the operational system of record. The ledger
 remains the append-only audit and machine-memory layer for the next Monday's re-check.
 A declined recommendation is logged, not treated as an active commitment.
+
+The draft maps to Petfolk's existing action-plan fields without introducing a second
+operating workflow:
+
+| Existing tracker field | Production behavior |
+|---|---|
+| **Date of Entry** | Recommendation creation date |
+| **Key Business Area** | KPI or operating category surfaced by the signal engine |
+| **Status** | Human-managed workflow state after approval |
+| **Team Member Responsible** | Proposed owner, confirmed or edited during approval |
+| **Goal / Outcome** | Measurable KPI improvement goal |
+| **Action Steps** | Grounded draft recommendation |
+| **Potential Barriers** | Suggested only when supported by evidence; otherwise human-entered |
+| **Resources** | Suggested only when supported by evidence; otherwise human-entered |
+| **Expected Result** | Expected measurable KPI movement |
+| **Progress Updates** | Human-entered evidence about whether the work was carried out |
+| **Target Completion Date** | Check-by or due date |
+| **Actual Completion Date** | Human-confirmed completion date |
+
+**Production assumptions:** Business Partners and Partner Doctors remain responsible
+for completing the fields and aligning the action plan; the Regional Partner remains
+the approval step; and Partners and Regional Managers continue tracking progress,
+status, and completion. The production integration can write approved plans to, and
+read later updates from, the existing tracker; authentication and Google Sheets
+write-back are not simulated in this case artifact. Tracker updates provide
+human-attested **execution** evidence, while the pipeline independently recomputes the
+KPI **outcome** from operating data. If no execution update exists, execution remains
+`unknown`: metric movement alone neither proves the work happened nor proves the
+intervention caused it. Exam-room transcripts are assumed available, but are kept out
+of the V1 deterministic priority score and would be used only as grounded context for
+a surfaced signal.
 
 Three layers, and the boundary between them is the design:
 
@@ -114,21 +179,7 @@ numbers do not change. See [`DATA/README.md`](DATA/README.md) for the data contr
 
 ---
 
-## Two Mondays
 
-Two real runs, one week apart. Nothing fabricated: the data ends at the week of
-2026-04-27, so this is the only pair the data supports.
-
-The 2026-04-27 run made two recommendations, each with a named owner and a check-by
-date of 2026-05-04. The 2026-05-04 run opened with them:
-
-- **Mount Pleasant, staff call-outs.** Call-outs went 5.5 → 9, so the outcome moved
-  the wrong way. Nobody attested that the prior action was completed, so execution
-  remains *unknown* and the digest asks the owner to confirm execution before
-  changing the mechanism.
-- **Morrisville, records in 24h.** 78.1% → 79.5%, moving the right way. Nobody
-  attested that anything was done, so execution stays *unknown* and the row stays
-  open. The digest credits the number, not the action.
 
 The ledger is append-only and it is what the next run reads first.
 
@@ -196,9 +247,6 @@ the Claude CLI, on OpenAI over plain HTTPS, or fully offline.
 `ws` for the session socket, `react` / `react-dom` / `react-router-dom` for the two
 views, `@vercel/analytics` for a page-view beacon on the deployed site only, and
 `vite` / `@vitejs/plugin-react` / `concurrently` for dev and build.
-
-No LLM SDK is required anywhere. The OpenAI tier is `urllib` and `fetch` against the
-documented HTTP APIs.
 
 Numbers are deterministic: same inputs, same figures, every run. The wording on top
 of them is not, because a model writes it inside the harness's rule table. The app
