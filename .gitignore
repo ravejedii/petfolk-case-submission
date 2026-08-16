@@ -1,0 +1,30 @@
+.venv/
+python/
+__pycache__/
+*.pyc
+.DS_Store
+app/node_modules/
+app/web/dist/
+app/server/uploads/
+# AI coding tools may create disposable Git worktrees here. They are local session
+# state and must never be committed as repository gitlinks.
+.claude/worktrees/
+nohup.out
+# API keys live here, never in the repo (pipeline/config.py loads it).
+.env.local
+# Run artifacts. The demo starts empty on purpose: the reviewer drops the CSVs
+# in and watches the pipeline produce these. Shipping a finished run would show
+# them the answer before the tool earns it.
+DATA/OUTPUTS/
+# Vercel: local project link, and the interpreter the build downloads.
+.vercel/
+pybin/
+node_modules/
+.vercel
+.env*
+!.env.example
+
+
+
+# Runtime debris: the reset rotates practice ledgers in here.
+DATA/OUTPUTS/ledger_archive/

@@ -1,0 +1,136 @@
+{
+  "step": "Data Validation & Check",
+  "created_at": "2026-08-15T23:54:15+00:00",
+  "as_of": "2026-05-04",
+  "latest_complete_week": "2026-04-27",
+  "source": {
+    "locations": {
+      "path": "DATA/INPUTS/locations (1).csv",
+      "sha256": "232da952e63726353de635577c5134da9c903ed190d0a6c0a652669a84a02f56",
+      "rows": 47,
+      "rows_in_scope": 47
+    },
+    "clinic_weekly": {
+      "path": "DATA/INPUTS/clinic_weekly (1).csv",
+      "sha256": "72caf611de48ad85ad8107880b22e048376dd77caa1235765a4d4012330559c1",
+      "rows": 2211,
+      "rows_in_scope": 2211
+    },
+    "provider_weekly": {
+      "path": "DATA/INPUTS/provider_weekly.csv",
+      "sha256": "c4d188080c9dc4dbb85012192ed3cf8846f729c0ff9a1bba4c874f5b655464e4",
+      "rows": 5627,
+      "rows_in_scope": 5627
+    },
+    "action_plans": {
+      "path": "DATA/INPUTS/action_plans.csv",
+      "sha256": "0983be0116e0c952e84839554af995991dc6dbd4203c701f677624f805d9f832",
+      "rows": 28,
+      "rows_in_scope": 28
+    }
+  },
+  "corrections_accepted": [
+    {
+      "id": "C1",
+      "table": "clinic_weekly",
+      "description": "Remove 9 exact duplicate rows left by a double-run of the weekly load (first occurrence kept).",
+      "rows_affected": 9,
+      "decision_status": "carried",
+      "scope": "standing",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 0
+    },
+    {
+      "id": "C2",
+      "table": "clinic_weekly",
+      "description": "Set 11 negative avg_wait_time_min values (clock-sync bug) to missing.",
+      "rows_affected": 11,
+      "decision_status": "carried",
+      "scope": "standing",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 0
+    },
+    {
+      "id": "C3",
+      "table": "provider_weekly",
+      "description": "Lowercase 225 employment_type values to the canonical full_time / part_time / relief.",
+      "rows_affected": 225,
+      "decision_status": "carried",
+      "scope": "standing",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 12
+    },
+    {
+      "id": "C4",
+      "table": "locations",
+      "description": "Relabel maturity_tier for 7 centers whose label contradicts their opened date (each center listed in details). Peer groups downstream use the corrected labels.",
+      "rows_affected": 7,
+      "decision_status": "carried",
+      "scope": "instance",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 0
+    }
+  ],
+  "corrections_declined": [],
+  "corrections_new": [],
+  "corrections_carried": [
+    {
+      "id": "C1",
+      "decision": "accepted",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 0
+    },
+    {
+      "id": "C2",
+      "decision": "accepted",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 0
+    },
+    {
+      "id": "C3",
+      "decision": "accepted",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 12
+    },
+    {
+      "id": "C4",
+      "decision": "accepted",
+      "decided_as_of": "2026-04-27",
+      "new_rows": 0
+    }
+  ],
+  "tables": {
+    "locations": {
+      "file": "locations.csv",
+      "rows_before": 47,
+      "rows_after": 47,
+      "cells_changed": 7
+    },
+    "clinic_weekly": {
+      "file": "clinic_weekly.csv",
+      "rows_before": 2211,
+      "rows_after": 2202,
+      "cells_changed": 11
+    },
+    "provider_weekly": {
+      "file": "provider_weekly.csv",
+      "rows_before": 5627,
+      "rows_after": 5627,
+      "cells_changed": 225
+    },
+    "action_plans": {
+      "file": "action_plans.csv",
+      "rows_before": 28,
+      "rows_after": 28,
+      "cells_changed": 0
+    }
+  },
+  "usage_flags": [
+    {
+      "flag": "membership_definition_change",
+      "date": "2026-02-09",
+      "meaning": "membership_conversion_pct denominator widened on this date; weeks before it are excluded from membership trend windows."
+    }
+  ],
+  "note": "DATA/INPUTS/ is never modified; the pipeline computes off DATA/TRANSLATION/."
+}

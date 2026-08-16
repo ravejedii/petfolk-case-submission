@@ -1,0 +1,48 @@
+location_id,location_name,metro_area,state,region,rmp_name,rop_name,opened_date,maturity_tier,exam_rooms,doctor_fte_target
+PCC_001,Ballantyne,Charlotte,NC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2022-11-30,mature,7,5.5
+PCC_002,Dilworth,Charlotte,NC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2024-11-23,ramping,6,5.7
+PCC_003,Cotswold,Charlotte,SC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2024-02-15,mature,8,5.6
+PCC_004,Steele Creek,Charlotte,SC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2024-12-27,ramping,4,3.5
+PCC_005,Brier Creek,Raleigh-Durham,NC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2025-10-07,new,8,4.8
+PCC_006,Mount Pleasant,Charleston,NC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2024-08-09,ramping,5,4.2
+PCC_007,Verdae,Greenville,SC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2025-12-05,new,7,2.4
+PCC_008,Cary Crossing,Raleigh-Durham,SC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2021-11-15,mature,5,4.5
+PCC_009,Daniel Island,Charleston,NC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2025-08-27,new,4,6.4
+PCC_010,Pelham Row,Greenville,NC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2026-01-03,new,4,5.5
+PCC_011,Morrisville,Raleigh-Durham,SC,Carolinas,Dr. Priya Raghunathan,Talia Okonkwo,2023-03-23,mature,7,2.7
+PCC_012,Sandy Springs,Atlanta,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2024-12-26,ramping,6,6.1
+PCC_013,Brookhaven,Savannah,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2022-09-11,mature,7,4.2
+PCC_014,Decatur Square,Atlanta,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2022-05-23,mature,7,4.2
+PCC_015,Vinings,Savannah,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2024-12-15,ramping,7,3.1
+PCC_016,Peachtree Corners,Atlanta,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2023-02-21,mature,7,5.8
+PCC_017,Chamblee,Savannah,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2021-08-23,mature,4,5.2
+PCC_018,Habersham,Atlanta,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2025-06-14,new,4,3.0
+PCC_019,Whitemarsh,Savannah,GA,Georgia,Dr. Marcus Delaney,Renata Pilar,2024-10-20,ramping,4,5.2
+PCC_020,Hyde Park,Tampa,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2022-07-10,mature,8,4.0
+PCC_021,Wesley Chapel,Orlando,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2024-07-02,ramping,7,4.6
+PCC_022,Westchase,Jacksonville,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2022-08-30,mature,8,5.4
+PCC_023,Carrollwood,Tampa,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2022-01-06,mature,7,4.4
+PCC_024,Winter Park,Orlando,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2024-07-18,ramping,7,5.6
+PCC_025,Lake Nona,Jacksonville,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2022-08-04,mature,7,2.3
+PCC_026,Dr. Phillips,Tampa,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2023-11-03,mature,7,6.1
+PCC_027,Baldwin Park,Orlando,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2025-10-15,new,8,3.6
+PCC_028,Riverside Ave,Jacksonville,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2024-02-25,mature,8,5.4
+PCC_029,San Marco,Tampa,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2025-09-26,new,8,3.8
+PCC_030,Mandarin,Orlando,FL,Florida,Dr. Sofia Arrellano,Devin Marchetti,2025-10-18,new,4,5.6
+PCC_031,Mueller,Austin,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2022-05-21,mature,4,2.8
+PCC_032,Zilker,Dallas,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2025-06-11,new,8,5.2
+PCC_033,Cedar Park,Phoenix,AZ,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2022-09-04,mature,7,6.2
+PCC_034,Round Rock,Austin,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2025-11-24,new,7,4.0
+PCC_035,Lakewood Heights,Dallas,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2020-10-21,mature,8,3.5
+PCC_036,Bishop Arts,Phoenix,AZ,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2022-05-06,mature,7,2.7
+PCC_037,Preston Hollow,Austin,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2022-03-20,mature,7,2.3
+PCC_038,Las Colinas,Dallas,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2020-11-27,mature,6,4.8
+PCC_039,Frisco Station,Phoenix,AZ,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2020-11-26,mature,6,4.0
+PCC_040,Arcadia,Austin,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2022-08-14,mature,4,3.4
+PCC_041,Desert Ridge,Dallas,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2023-06-14,mature,5,5.4
+PCC_042,Camelback,Phoenix,AZ,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2023-04-23,mature,8,2.3
+PCC_043,Gilbert Crossing,Austin,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2022-02-28,mature,5,4.2
+PCC_044,Tempe Mill,Dallas,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2023-03-18,mature,6,5.2
+PCC_045,North Loop,Phoenix,AZ,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2025-08-27,new,7,4.9
+PCC_046,Domain North,Austin,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2023-07-16,mature,7,3.6
+PCC_047,Southpark,Dallas,TX,Texas/Southwest,Dr. Ellis Thornbury,Kwame Baptiste,2025-09-21,new,8,3.5
