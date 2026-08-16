@@ -4,7 +4,7 @@
 
 **The Monday Digest.** A working version of Option A from the Case Study. 
 
-> **Public candidate submission.** This is an unofficial case-study prototype, not
+> **Public candidate submission.** This is an unofficial case-study artifact, not
 > a Petfolk production system. Petfolk names and trademarks belong to Petfolk.
 
 
@@ -31,9 +31,9 @@ validates the inputs, surfaces the few priorities that deserve attention, recomm
 a specific action, routes it for approval, and returns the following week to check
 separately whether the work happened and whether it worked.
 
-The experience is designed for a thirty-minute Monday review. Deterministic code owns
-every calculation and threshold; AI is limited to verified interpretation,
-recommendations, and grounded conversation.
+The experience is designed for a thirty-minute Monday review. Fixed rules handle
+every calculation and threshold. AI explains verified findings, drafts
+recommendations, and answers leaders' questions.
 
 ![The Monday digest for 2026-05-04](docs/assets/digest.jpg)
 
@@ -93,7 +93,7 @@ flowchart TD
     A["<b>1 · TRUST THE DATA</b><br/>validate every table → propose corrections<br/>→ a human accepts or declines → corrected copies"]
     B["<b>2 · DECIDE WHAT MATTERS</b><br/>drift + peer gap + spike, sized against each<br/>center's own volatility → suppress noise → rank"]
     C["<b>3 · VERIFY THE SIGNAL</b><br/>turn ranked rows into supporting evidence<br/>→ reconcile every claim against deterministic facts"]
-    D["<b>4 · RECOMMEND + DRAFT PLAN</b><br/>reccommended action plan + owner + expected<br/>movement + check-by date"]
+    D["<b>4 · RECOMMEND + DRAFT PLAN</b><br/>recommended action plan + owner + expected<br/>movement + check-by date"]
     E["<b>5 · APPROVE THE PLAN</b><br/>Regional Partner approves · edits · declines<br/>approved plan → Operating Plan Tracker<br/>every decision → audit ledger"]
     F["<b>6 · RE-CHECK NEXT MONDAY</b><br/>Was it done? (attested) · Did it work? (measured)<br/>→ close · adjust the mechanism · escalate"]
     A --> B --> C --> D --> E --> F
@@ -102,10 +102,10 @@ flowchart TD
 
 **Production fit:** the case artifact uses its local ledger to prove the closed loop.
 In Petfolk's live workflow, a generated action is a draft until the Regional Partner
-approves or edits it; approved actions write to the clinic's existing Google Sheets
-Operating Plan Tracker, which remains the operational system of record. The ledger
-remains the append-only audit and machine-memory layer for the next Monday's re-check.
-A declined recommendation is logged, not treated as an active commitment.
+approves or edits it; approved actions sync to the existing Operating Plan Tracker,
+which remains the operational system of record. The ledger and append-only event log
+preserve every decision and give the next Monday's run the context it needs to re-check
+prior actions. A declined recommendation is logged, not treated as an active commitment.
 
 The draft maps to Petfolk's existing action-plan fields without introducing a second
 operating workflow:
@@ -129,7 +129,7 @@ operating workflow:
 for completing the fields and aligning the action plan; the Regional Partner remains
 the approval step; and Partners and Regional Managers continue tracking progress,
 status, and completion. The production integration can write approved plans to, and
-read later updates from, the existing tracker; authentication and Google Sheets
+read later updates from, the existing tracker; authentication and production
 write-back are not simulated in this case artifact. Tracker updates provide
 human-attested **execution** evidence, while the pipeline independently recomputes the
 KPI **outcome** from operating data. If no execution update exists, execution remains
@@ -195,7 +195,7 @@ sentence falls back to a deterministic template and the numbers do not change. S
 
 ---
 
-## The harness
+## How AI output is checked
 
 Every AI-written conclusion is checked against the underlying numbers before it
 reaches a leader. A below-baseline plan cannot be called "on track"; a plan that has
@@ -235,6 +235,23 @@ previous phase's numbers matched.
 
 Tools: Claude Code · Codex · Anthropic and OpenAI APIs · pandas · numpy · pytest and
 `node --test` · React · Vite · Express · Vercel · git.
+
+---
+
+## What I deliberately left out
+
+I deliberately left production integrations out of the technical artifact: no live
+Operating Plan Tracker write-back, practice management system, HRIS, client
+communications, or production authentication and role permissions. I also kept
+exam-room transcripts out of the V1 priority score and refused to infer that work
+occurred from KPI movement alone.
+
+The harder call was stopping at a complete, testable decision loop instead of adding
+integrations that would look broader but could not be validated with the access and
+data provided. I used the time to prove the core loop on real case data: validate,
+prioritize, recommend, approve, remember, and re-check. The next production step is
+two-way Operating Plan Tracker sync; transcript analysis follows once Petfolk defines
+the first use case and how success will be measured.
 
 ---
 
